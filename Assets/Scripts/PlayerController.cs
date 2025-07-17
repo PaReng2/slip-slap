@@ -15,6 +15,8 @@ public class PlayerController : MonoBehaviour
     private Vector3 Player1ObjStartPos;
     private Vector3 Player2ObjStartPos;
 
+    private bool  isDead =  false;
+
     void Start()
     {
         // 각 오브젝트의 초기 위치 저장
@@ -74,6 +76,25 @@ public class PlayerController : MonoBehaviour
 
             Player2Obj.transform.position = newXPos;
         }
+    }
+
+    public void HandlePlayerDeath(HitDetector.PlayerID id)
+    {
+        GameManager manager = FindAnyObjectByType<GameManager>();
+        if (id == HitDetector.PlayerID.Player1)
+        {
+            Player1Obj.SetActive(false); // 또는 애니메이션/연출
+            manager.firstPoint += 1;
+            Debug.Log("Player1 사망");
+        }
+        else if (id == HitDetector.PlayerID.Player2)
+        {
+            Player2Obj.SetActive(false);
+            manager.secondPoint += 1;
+            Debug.Log("Player2 사망");
+        }
+
+        
     }
 
 }

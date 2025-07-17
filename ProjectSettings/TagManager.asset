@@ -4,8 +4,9 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - bounHor
-  - bounVer
+  - Bullet
+  - P1
+  - P2
   layers:
   - Default
   - TransparentFX
