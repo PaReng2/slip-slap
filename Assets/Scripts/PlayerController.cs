@@ -84,13 +84,13 @@ public class PlayerController : MonoBehaviour
         if (id == HitDetector.PlayerID.Player1)
         {
             Player1Obj.SetActive(false); // 또는 애니메이션/연출
-            manager.firstPoint += 1;
+            manager.secondPoint += 1;
             Debug.Log("Player1 사망");
         }
         else if (id == HitDetector.PlayerID.Player2)
         {
             Player2Obj.SetActive(false);
-            manager.secondPoint += 1;
+            manager.firstPoint += 1;
             Debug.Log("Player2 사망");
         }
 
