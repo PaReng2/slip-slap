@@ -10,10 +10,18 @@ public class GameManager : MonoBehaviour
     public float firstPoint;
     public float secondPoint;
 
+    public bool isDathP1;
+    public bool isDathP2;
+
     private float curStPoint;
     private float curNdPoint;
     private Vector3 originalScale;
     public GameObject ScoreBG;
+
+    [Header("playerPrefab")]
+    public GameObject P1;
+    public GameObject P2;
+     
 
     [Header("GameOverText")]
     public TextMeshProUGUI ScoreGuide;
@@ -27,16 +35,19 @@ public class GameManager : MonoBehaviour
         curStPoint = firstPoint;
         curNdPoint = secondPoint;
 
+        isDathP1 = false;
+        isDathP2 = false;
     }
 
     // Update is called once per frame
     void Update()
     {
-        Scored();
+        StartCoroutine(Scored());
     }
 
-    async Task Scored()
+    IEnumerator Scored()
     {
+        
         if (curStPoint != firstPoint || curNdPoint != secondPoint)
         {
             
@@ -59,9 +70,21 @@ public class GameManager : MonoBehaviour
                 } );
            
             seq.Append(ScoreBG.transform.DOScale(originalScale, 1.5f));
-           
+            
         }
-        
+        PlayerController playerOBJ = FindAnyObjectByType<PlayerController>();
+
+        yield return new WaitForSeconds(2.5f);
+        if (isDathP1)
+        {
+            playerOBJ.Player1Obj.SetActive(true);
+        }
+
+        if (isDathP2)
+        {
+          playerOBJ.Player2Obj.SetActive(true);   
+        }
+
     }
 
     void TextEnabled()

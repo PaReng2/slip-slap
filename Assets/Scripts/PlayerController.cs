@@ -26,6 +26,11 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
+        if (Player1Obj == null)
+            Player1Obj = GameObject.FindWithTag("P1");
+
+        if (Player2Obj == null)
+            Player2Obj = GameObject.FindWithTag("P2");
         Move();
     }
 
@@ -85,16 +90,18 @@ public class PlayerController : MonoBehaviour
         {
             Player1Obj.SetActive(false); // 또는 애니메이션/연출
             manager.secondPoint += 1;
+            manager.isDathP1 = true;
+            Player1Obj.SetActive(false) ;
             Debug.Log("Player1 사망");
         }
         else if (id == HitDetector.PlayerID.Player2)
         {
             Player2Obj.SetActive(false);
             manager.firstPoint += 1;
+            manager.isDathP2 = true;
+            Player2Obj.SetActive(false) ;
             Debug.Log("Player2 사망");
         }
-
-        
     }
 
 }

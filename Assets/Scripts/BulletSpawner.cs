@@ -5,8 +5,6 @@ using UnityEngine;
 public class BulletSpawner : MonoBehaviour
 {
     [Header("Prefab")]
-    public GameObject player1;
-    public GameObject player2;
     public GameObject bulletPrefab;
 
     public float minSpawnTime;
@@ -23,11 +21,7 @@ public class BulletSpawner : MonoBehaviour
     void Start()
      {
         bounceForce = Random.Range(10f, 30f);
-        
-        target = FindObjectOfType<PlayerController>().transform;
-        spawnRate = Random.Range(minSpawnTime, maxSpawnTime);
-        timeAfterSpawn = 0f;
-        PlayerController player = FindAnyObjectByType<PlayerController>();
+
      }
 
     // Update is called once per frame
