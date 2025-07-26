@@ -28,6 +28,8 @@ public class HitDetector : MonoBehaviour
                 {
                 controllerManager.HandlePlayerDeath(playerID);
                 }
+
         }
+        
     }
 }

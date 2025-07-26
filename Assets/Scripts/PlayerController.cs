@@ -9,8 +9,7 @@ public class PlayerController : MonoBehaviour
     public GameObject Player2Obj;
     public float PlayerMoveSpeed = 5f;
 
-    public float xMoveRange = 3f; // XObj°¡ ¿òÁ÷ÀÏ ¼ö ÀÖ´Â ¹üÀ§
-    public float yMoveRange = 3f; // YObj°¡ ¿òÁ÷ÀÏ ¼ö ÀÖ´Â ¹üÀ§
+    public float xMoveRange = 3f; 
 
     private Vector3 Player1ObjStartPos;
     private Vector3 Player2ObjStartPos;
@@ -19,7 +18,6 @@ public class PlayerController : MonoBehaviour
 
     void Start()
     {
-        // °¢ ¿ÀºêÁ§Æ®ÀÇ ÃÊ±â À§Ä¡ ÀúÀå
         Player1ObjStartPos = Player1Obj.transform.position;
         Player2ObjStartPos = Player2Obj.transform.position;
     }
@@ -36,7 +34,7 @@ public class PlayerController : MonoBehaviour
 
     void Move()
     {
-        // === Player1Obj: A / D Å°·Î XÃà ÀÌµ¿ ===
+        // === Player1Obj: A / D Å°ï¿½ï¿½ Xï¿½ï¿½ ï¿½Ìµï¿½ ===
         float moveX1 = 0f;
         if (Input.GetKey(KeyCode.A))
         {
@@ -59,7 +57,7 @@ public class PlayerController : MonoBehaviour
             Player1Obj.transform.position = newXPos;
         }
 
-        // === Player2Obj: ÁÂ¿ì ¹æÇâÅ°·Î XÃà ÀÌµ¿ ===
+        // === Player2Obj: ï¿½Â¿ï¿½ ï¿½ï¿½ï¿½ï¿½Å°ï¿½ï¿½ Xï¿½ï¿½ ï¿½Ìµï¿½ ===
         float moveX2 = 0f;
         if (Input.GetKey(KeyCode.LeftArrow))
         {
@@ -72,12 +70,12 @@ public class PlayerController : MonoBehaviour
 
         if (moveX2 != 0)
         {
-            Vector3 newXPos = Player2Obj.transform.position;    //ÃÊ±â À§Ä¡°ª
-            newXPos.x += moveX2 * PlayerMoveSpeed * Time.deltaTime;     //xÃàÀ¸·Î ÀÌµ¿
+            Vector3 newXPos = Player2Obj.transform.position;    //ï¿½Ê±ï¿½ ï¿½ï¿½Ä¡ï¿½ï¿½
+            newXPos.x += moveX2 * PlayerMoveSpeed * Time.deltaTime;     //xï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ìµï¿½
 
             float minX = Player2ObjStartPos.x - xMoveRange;     
             float maxX = Player2ObjStartPos.x + xMoveRange;
-            newXPos.x = Mathf.Clamp(newXPos.x, minX, maxX);     //ÇöÀç ÇÃ·¹ÀÌ¾î À§Ä¡ +- ÇÏ¿© ÀÌµ¿ ¹üÀ§ ¼³Á¤
+            newXPos.x = Mathf.Clamp(newXPos.x, minX, maxX);     //ï¿½ï¿½ï¿½ï¿½ ï¿½Ã·ï¿½ï¿½Ì¾ï¿½ ï¿½ï¿½Ä¡ +- ï¿½Ï¿ï¿½ ï¿½Ìµï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 
             Player2Obj.transform.position = newXPos;
         }
@@ -88,19 +86,17 @@ public class PlayerController : MonoBehaviour
         GameManager manager = FindAnyObjectByType<GameManager>();
         if (id == HitDetector.PlayerID.Player1)
         {
-            Player1Obj.SetActive(false); // ¶Ç´Â ¾Ö´Ï¸ÞÀÌ¼Ç/¿¬Ãâ
+            Player1Obj.SetActive(false); // ï¿½Ç´ï¿½ ï¿½Ö´Ï¸ï¿½ï¿½Ì¼ï¿½/ï¿½ï¿½ï¿½ï¿½
             manager.secondPoint += 1;
             manager.isDathP1 = true;
-            Player1Obj.SetActive(false) ;
-            Debug.Log("Player1 »ç¸Á");
+            Debug.Log("Player1 die");
         }
         else if (id == HitDetector.PlayerID.Player2)
         {
             Player2Obj.SetActive(false);
             manager.firstPoint += 1;
             manager.isDathP2 = true;
-            Player2Obj.SetActive(false) ;
-            Debug.Log("Player2 »ç¸Á");
+            Debug.Log("Player2 die");
         }
     }
 

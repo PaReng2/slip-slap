@@ -63,7 +63,7 @@ public class GameManager : MonoBehaviour
                 TextEnabled();
                 TextInputScored();
                  });
-            seq.AppendInterval(2f); // 원하는 유지 시간
+            seq.AppendInterval(2f); // 
 
             seq.AppendCallback(() => {
                   TextDisabled();

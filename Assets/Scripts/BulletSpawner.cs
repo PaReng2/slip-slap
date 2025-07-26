@@ -7,49 +7,24 @@ public class BulletSpawner : MonoBehaviour
     [Header("Prefab")]
     public GameObject bulletPrefab;
 
-    public float minSpawnTime;
-    public float maxSpawnTime;
-
-    private float bounceForce;
-    private float dathTime;
-
-    private float spawnRate;
-    private float timeAfterSpawn;
-    private Transform target;
-
-    // Start is called before the first frame update
+    public float spawnInterval = 0.4f;
+    public float minRadius = 3f;     // ìµœì†Œ ê±°ë¦¬
+    public float maxRadius = 10f;    // ìµœëŒ€ ê±°ë¦¬
+    
     void Start()
-     {
-        bounceForce = Random.Range(10f, 30f);
+    {
+        InvokeRepeating(nameof(Spawn), 0f, spawnInterval);
+    }
 
-     }
+    void Spawn()
+    {
+        float angle = Random.Range(0f, Mathf.PI * 2f);
+        float radius = Random.Range(minRadius, maxRadius); // ë°˜ì§€ë¦„ì„ ë” í¬ê²Œ
 
-    // Update is called once per frame
-    void Update()
-      {
-        
-        timeAfterSpawn += Time.deltaTime;
+        Vector3 offset = new Vector3(Mathf.Cos(angle), Mathf.Sin(angle), 0f) * radius;
+        Vector3 spawnPos = transform.position + offset;
 
-        if (timeAfterSpawn >= spawnRate)
-        {
-            timeAfterSpawn = 0f;
-            dathTime = Random.Range(2f, 5f);
-            GameObject newBullet = Instantiate(bulletPrefab, transform.position, Quaternion.identity);  
-
-            // »õ·Î »ý¼ºµÈ bulletÀÇ Rigidbody °¡Á®¿À±â
-            Rigidbody2D bulletRb = newBullet.GetComponent<Rigidbody2D>();
-
-            if (bulletRb != null)   //·£´ýÇÑ À§Ä¡°ªÀ» »Ì¾Æ¼­ Èð»Ñ¸®±â
-                {
-                Vector2 randomDirection = new Vector2(Random.Range(-1f, 1f), Random.Range(0.5f, 1f)).normalized; 
-                bulletRb.AddForce(randomDirection * bounceForce, ForceMode2D.Impulse);
-                }
-
-            spawnRate = Random.Range(minSpawnTime, maxSpawnTime);   //½ºÆù ÄðÀº ·£´ý
-
-            Destroy(newBullet, dathTime);   //ÀÎ½ºÅÏ½ºÈ­ÇÏ¿© »õ·Î »ý¼ºÇÑ ¿ÀºêÁ§Æ®¸¦ ÆÄ±« (¿Ü¿öµÎÀÚ)
-        }
-
-      }
-
+        Instantiate(bulletPrefab, spawnPos, Quaternion.identity);
+    }
 }
+
