@@ -24,11 +24,11 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-        if (Player1Obj == null)
+        /*if (Player1Obj == null)
             Player1Obj = GameObject.FindWithTag("P1");
 
         if (Player2Obj == null)
-            Player2Obj = GameObject.FindWithTag("P2");
+            Player2Obj = GameObject.FindWithTag("P2");*/
         Move();
     }
 
@@ -86,14 +86,12 @@ public class PlayerController : MonoBehaviour
         GameManager manager = FindAnyObjectByType<GameManager>();
         if (id == HitDetector.PlayerID.Player1)
         {
-            Player1Obj.SetActive(false); // �Ǵ� �ִϸ��̼�/����
             manager.secondPoint += 1;
             manager.isDathP1 = true;
             Debug.Log("Player1 die");
         }
         else if (id == HitDetector.PlayerID.Player2)
         {
-            Player2Obj.SetActive(false);
             manager.firstPoint += 1;
             manager.isDathP2 = true;
             Debug.Log("Player2 die");

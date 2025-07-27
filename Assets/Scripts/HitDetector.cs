@@ -19,17 +19,22 @@ public class HitDetector : MonoBehaviour
     void OnTriggerEnter2D(Collider2D other)
     {
         if (isDead) return;
-
-        if (other.CompareTag("Bullet"))
+        if (!isDead)
         {
-            isDead = true;
-
-            if (controllerManager != null)
+            if (other.CompareTag("Bullet"))
+            {
+                isDead = true;
+            
+                if (controllerManager != null)
                 {
-                controllerManager.HandlePlayerDeath(playerID);
+                    controllerManager.HandlePlayerDeath(playerID);
                 }
-
+            
+            }
+            isDead = false;
         }
+
+        
         
     }
 }

@@ -17,19 +17,28 @@ public class GameManager : MonoBehaviour
     private float curNdPoint;
     private Vector3 originalScale;
     public GameObject ScoreBG;
+    
+    private Vector2 originalP1Position;
+    private Vector2 originalP2Position;
+    
+    private bool isScoring = false;
 
     [Header("playerPrefab")]
-    public GameObject P1;
-    public GameObject P2;
+    public GameObject p1;
+    public GameObject p2;
      
 
     [Header("GameOverText")]
     public TextMeshProUGUI ScoreGuide;
     public TextMeshProUGUI ScoreST;
     public TextMeshProUGUI ScoreND;
-    // Start is called before the first frame update
+
+
     void Start()
     {
+        originalP1Position = p1.transform.position;
+        originalP2Position = p2.transform.position;
+        
         TextDisabled();
         originalScale = ScoreBG.transform.localScale;
         curStPoint = firstPoint;
@@ -37,20 +46,29 @@ public class GameManager : MonoBehaviour
 
         isDathP1 = false;
         isDathP2 = false;
+        
     }
 
-    // Update is called once per frame
     void Update()
     {
-        StartCoroutine(Scored());
+        if (!isScoring && (curStPoint != firstPoint || curNdPoint != secondPoint))
+        {
+            StartCoroutine(Scored());
+        }
     }
 
     IEnumerator Scored()
     {
+        BulletSpawner spawner = FindObjectOfType<BulletSpawner>();
+        if (isDathP1 || isDathP2)
+        {
+            p1.transform.position = new Vector2(1000, 1000);
+            p2.transform.position = new Vector2(1000, 1000);
+        }
         
         if (curStPoint != firstPoint || curNdPoint != secondPoint)
         {
-            
+            spawner.enabled = false;
             curStPoint = firstPoint;
             curNdPoint = secondPoint;
 
@@ -63,7 +81,7 @@ public class GameManager : MonoBehaviour
                 TextEnabled();
                 TextInputScored();
                  });
-            seq.AppendInterval(2f); // 
+            seq.AppendInterval(2f);  
 
             seq.AppendCallback(() => {
                   TextDisabled();
@@ -72,19 +90,13 @@ public class GameManager : MonoBehaviour
             seq.Append(ScoreBG.transform.DOScale(originalScale, 1.5f));
             
         }
-        PlayerController playerOBJ = FindAnyObjectByType<PlayerController>();
 
-        yield return new WaitForSeconds(2.5f);
-        if (isDathP1)
+        yield return new WaitForSeconds(5.5f);
+        if (isDathP1 || isDathP2)
         {
-            playerOBJ.Player1Obj.SetActive(true);
+            p1.transform.position = originalP1Position;
+            p2.transform.position = originalP2Position;
         }
-
-        if (isDathP2)
-        {
-          playerOBJ.Player2Obj.SetActive(true);   
-        }
-
     }
 
     void TextEnabled()
