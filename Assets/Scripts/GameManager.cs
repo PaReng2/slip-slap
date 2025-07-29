@@ -27,6 +27,8 @@ public class GameManager : MonoBehaviour
     public GameObject p1;
     public GameObject p2;
      
+    [Header("GameOverpanel")]
+    public GameObject Panel;
 
     [Header("GameOverText")]
     public TextMeshProUGUI ScoreGuide;
@@ -116,5 +118,10 @@ public class GameManager : MonoBehaviour
     {
         ScoreST.text =  firstPoint.ToString();
         ScoreND.text = secondPoint.ToString();
+    }
+
+    void isGameOver()
+    {
+        
     }
 }

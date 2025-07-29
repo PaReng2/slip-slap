@@ -24,11 +24,7 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-        /*if (Player1Obj == null)
-            Player1Obj = GameObject.FindWithTag("P1");
 
-        if (Player2Obj == null)
-            Player2Obj = GameObject.FindWithTag("P2");*/
         Move();
     }
 
