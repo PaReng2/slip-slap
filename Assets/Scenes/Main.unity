@@ -818,7 +818,7 @@ GameObject:
   - component: {fileID: 549698090}
   - component: {fileID: 549698089}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: OO Win
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -872,8 +872,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294963061
-  m_fontColor: {r: 0.45882356, g: 0.93735003, b: 1, a: 1}
+    rgba: 4294967295
+  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -1084,7 +1084,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1216915624
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1127,7 +1127,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: -2047613651344142497, guid: e869268efd7d38745a52967381cef55f, type: 3}
+  m_Sprite: {fileID: -1027629714855741296, guid: 39e677f5e32c8cb45bf562e8820a70bc, type: 3}
   m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -1336,7 +1336,8 @@ MonoBehaviour:
   isScoring: 0
   p1: {fileID: 2374433302404524700}
   p2: {fileID: 2784188794351111071}
-  Panel: {fileID: 0}
+  panel: {fileID: 1216915623}
+  whoWin: {fileID: 549698089}
   ScoreGuide: {fileID: 2100454427}
   ScoreST: {fileID: 488314489}
   ScoreND: {fileID: 141450443}
@@ -1666,7 +1667,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: ReStart
+  m_Text: Go Title
 --- !u!222 &2043221406
 CanvasRenderer:
   m_ObjectHideFlags: 0

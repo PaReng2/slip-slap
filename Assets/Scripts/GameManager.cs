@@ -27,8 +27,9 @@ public class GameManager : MonoBehaviour
     public GameObject p1;
     public GameObject p2;
      
-    [Header("GameOverpanel")]
-    public GameObject Panel;
+    [Header("GameOverPanel")]
+    public GameObject panel;
+    public TextMeshProUGUI whoWin;
 
     [Header("GameOverText")]
     public TextMeshProUGUI ScoreGuide;
@@ -38,6 +39,7 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
+        panel.SetActive(false);
         originalP1Position = p1.transform.position;
         originalP2Position = p2.transform.position;
         
@@ -60,6 +62,7 @@ public class GameManager : MonoBehaviour
         }
         BulletSpawner spawner = FindObjectOfType<BulletSpawner>();
         spawner.StopSpawn();
+        isGameOver();
     }
 
     IEnumerator Scored()
@@ -128,5 +131,16 @@ public class GameManager : MonoBehaviour
     void isGameOver()
     {
         
+        if (firstPoint >= 5)
+        {
+            panel.SetActive(true);
+            whoWin.text = "1P Win!";
+        }
+        else if (secondPoint >= 5)
+        {
+            panel.SetActive(true);
+            whoWin.text = "2P Win!";
+        }
+
     }
 }
