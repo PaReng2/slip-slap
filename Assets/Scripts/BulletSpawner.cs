@@ -13,7 +13,6 @@ public class BulletSpawner : MonoBehaviour
     
     void Start()
     {
-        
         InvokeRepeating(nameof(Spawn), 0f, spawnInterval);
     }
 
@@ -28,5 +27,17 @@ public class BulletSpawner : MonoBehaviour
         Instantiate(bulletPrefab, spawnPos, Quaternion.identity);
     }
 
+    public void StopSpawn()
+    {
+        GameManager manager = FindObjectOfType<GameManager>();
+        if (manager.isScoring)
+        {
+            CancelInvoke(nameof(Spawn)); // 점수 애니메이션 중이면 멈춰
+        }
+        else if (!IsInvoking(nameof(Spawn)))
+        {
+            InvokeRepeating(nameof(Spawn), 0f, spawnInterval); // 안 돌고 있으면 다시 시작
+        }
+    }
 }
 

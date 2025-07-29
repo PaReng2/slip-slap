@@ -14,7 +14,8 @@ public class HitDetector : MonoBehaviour
     void Update()   
     {
         if(controllerManager == null)
-        controllerManager = FindObjectOfType<PlayerController>();
+            controllerManager = FindObjectOfType<PlayerController>();
+        
     }
     void OnTriggerEnter2D(Collider2D other)
     {

@@ -21,7 +21,7 @@ public class GameManager : MonoBehaviour
     private Vector2 originalP1Position;
     private Vector2 originalP2Position;
     
-    private bool isScoring = false;
+    public bool isScoring = false;
 
     [Header("playerPrefab")]
     public GameObject p1;
@@ -55,13 +55,16 @@ public class GameManager : MonoBehaviour
     {
         if (!isScoring && (curStPoint != firstPoint || curNdPoint != secondPoint))
         {
+            isScoring = true;
             StartCoroutine(Scored());
         }
+        BulletSpawner spawner = FindObjectOfType<BulletSpawner>();
+        spawner.StopSpawn();
     }
 
     IEnumerator Scored()
     {
-        BulletSpawner spawner = FindObjectOfType<BulletSpawner>();
+        
         if (isDathP1 || isDathP2)
         {
             p1.transform.position = new Vector2(1000, 1000);
@@ -70,7 +73,7 @@ public class GameManager : MonoBehaviour
         
         if (curStPoint != firstPoint || curNdPoint != secondPoint)
         {
-            spawner.enabled = false;
+            
             curStPoint = firstPoint;
             curNdPoint = secondPoint;
 
@@ -99,6 +102,8 @@ public class GameManager : MonoBehaviour
             p1.transform.position = originalP1Position;
             p2.transform.position = originalP2Position;
         }
+
+        isScoring = false;
     }
 
     void TextEnabled()
