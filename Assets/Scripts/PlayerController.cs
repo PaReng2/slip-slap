@@ -9,8 +9,12 @@ public class PlayerController : MonoBehaviour
     public GameObject Player2Obj;
     public float PlayerMoveSpeed = 5f;
 
-    public float xMoveRange = 3f; 
+    public float xMoveRange = 3f;
 
+    [Header("Debuff")] 
+    public bool frozenP1;
+    public bool frozenP2;
+        
     private Vector3 Player1ObjStartPos;
     private Vector3 Player2ObjStartPos;
 
@@ -18,6 +22,9 @@ public class PlayerController : MonoBehaviour
 
     void Start()
     {
+        frozenP1 = false;
+        frozenP2 = false;
+        
         Player1ObjStartPos = Player1Obj.transform.position;
         Player2ObjStartPos = Player2Obj.transform.position;
     }
@@ -34,11 +41,11 @@ public class PlayerController : MonoBehaviour
         float moveX1 = 0f;
         if (Input.GetKey(KeyCode.A))
         {
-            moveX1 = -1f;
+            moveX1 = frozenP1 ? -0.5f : -1f;
         }
         else if (Input.GetKey(KeyCode.D))
         {
-            moveX1 = 1f;
+            moveX1 = frozenP1 ? 0.5f : 1f;
         }
 
         if (moveX1 != 0)
@@ -57,11 +64,11 @@ public class PlayerController : MonoBehaviour
         float moveX2 = 0f;
         if (Input.GetKey(KeyCode.LeftArrow))
         {
-            moveX2 = -1f;
+            moveX2 = frozenP2 ? -0.5f : -1f;
         }
         else if (Input.GetKey(KeyCode.RightArrow))
         {
-            moveX2 = 1f;
+            moveX2 = frozenP2 ? 0.5f : 1f;
         }
 
         if (moveX2 != 0)

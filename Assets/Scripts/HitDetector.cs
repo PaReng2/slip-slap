@@ -32,10 +32,14 @@ public class HitDetector : MonoBehaviour
                 }
             
             }
-            isDead = false;
+            
         }
 
         
         
+    }
+    public void Revive()
+    {
+        isDead = false;
     }
 }

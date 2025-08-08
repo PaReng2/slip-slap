@@ -36,9 +36,16 @@ public class GameManager : MonoBehaviour
     public TextMeshProUGUI ScoreST;
     public TextMeshProUGUI ScoreND;
 
+    [Header("DebuffText")] 
+    public TextMeshProUGUI Debuff1;
+    public TextMeshProUGUI Debuff2;
+
 
     void Start()
     {
+        Debuff1.enabled = false;
+        Debuff2.enabled = false;
+        
         panel.SetActive(false);
         originalP1Position = p1.transform.position;
         originalP2Position = p2.transform.position;
@@ -63,6 +70,7 @@ public class GameManager : MonoBehaviour
         BulletSpawner spawner = FindObjectOfType<BulletSpawner>();
         spawner.StopSpawn();
         isGameOver();
+        EffectBullet();
     }
 
     IEnumerator Scored()
@@ -104,6 +112,21 @@ public class GameManager : MonoBehaviour
         {
             p1.transform.position = originalP1Position;
             p2.transform.position = originalP2Position;
+            
+            isDathP1 = false;
+            isDathP2 = false;
+
+            PlayerController player = FindObjectOfType<PlayerController>();
+            if (player != null)
+            {
+                player.frozenP1 = false;
+                player.frozenP2 = false;
+            }
+
+            var hit1 = p1.GetComponentInChildren<HitDetector>();
+            var hit2 = p2.GetComponentInChildren<HitDetector>();
+            if (hit1 != null) hit1.Revive();
+            if (hit2 != null) hit2.Revive();
         }
 
         isScoring = false;
@@ -143,4 +166,31 @@ public class GameManager : MonoBehaviour
         }
 
     }
+
+    void EffectBullet()
+    {
+        PlayerController player = FindObjectOfType<PlayerController>();
+        
+        if (player.frozenP1)
+        {
+            Debuff1.enabled = true;
+            Debuff1.text = "Slow!";
+        }
+
+        if (player.frozenP2)
+        {
+            Debuff2.enabled = true;
+            Debuff2.text = "Slow!";
+        }
+
+        if (isDathP1 || isDathP2)
+        {
+            Debuff1.enabled = false;
+            Debuff2.enabled = false;
+
+            player.frozenP1 = false;
+            player.frozenP2 = false;
+        }
+    }
+
 }
