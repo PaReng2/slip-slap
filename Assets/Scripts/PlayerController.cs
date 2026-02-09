@@ -11,9 +11,13 @@ public class PlayerController : MonoBehaviour
 
     public float xMoveRange = 3f;
 
+    [Header("Dath Effect")]
+    public ParticleSystem p1DathEffect;
+    public ParticleSystem p2DathEffect;
+
     [Header("Debuff")] 
-    public bool frozenP1;
-    public bool frozenP2;
+    public bool slowP1;
+    public bool slowP2;
         
     private Vector3 Player1ObjStartPos;
     private Vector3 Player2ObjStartPos;
@@ -22,8 +26,8 @@ public class PlayerController : MonoBehaviour
 
     void Start()
     {
-        frozenP1 = false;
-        frozenP2 = false;
+        slowP1 = false;
+        slowP2 = false;
         
         Player1ObjStartPos = Player1Obj.transform.position;
         Player2ObjStartPos = Player2Obj.transform.position;
@@ -41,11 +45,11 @@ public class PlayerController : MonoBehaviour
         float moveX1 = 0f;
         if (Input.GetKey(KeyCode.A))
         {
-            moveX1 = frozenP1 ? -0.5f : -1f;
+            moveX1 = slowP1 ? -0.5f : -1f;
         }
         else if (Input.GetKey(KeyCode.D))
         {
-            moveX1 = frozenP1 ? 0.5f : 1f;
+            moveX1 = slowP1 ? 0.5f : 1f;
         }
 
         if (moveX1 != 0)
@@ -64,11 +68,11 @@ public class PlayerController : MonoBehaviour
         float moveX2 = 0f;
         if (Input.GetKey(KeyCode.LeftArrow))
         {
-            moveX2 = frozenP2 ? -0.5f : -1f;
+            moveX2 = slowP2 ? -0.5f : -1f;
         }
         else if (Input.GetKey(KeyCode.RightArrow))
         {
-            moveX2 = frozenP2 ? 0.5f : 1f;
+            moveX2 = slowP2 ? 0.5f : 1f;
         }
 
         if (moveX2 != 0)
@@ -91,12 +95,14 @@ public class PlayerController : MonoBehaviour
         {
             manager.secondPoint += 1;
             manager.isDathP1 = true;
+            p1DathEffect.Play();
             Debug.Log("Player1 die");
         }
         else if (id == HitDetector.PlayerID.Player2)
         {
             manager.firstPoint += 1;
             manager.isDathP2 = true;
+            p2DathEffect.Play();
             Debug.Log("Player2 die");
         }
     }

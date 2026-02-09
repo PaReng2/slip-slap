@@ -9,6 +9,7 @@ TagManager:
   - P2
   - Spawner
   - Slower
+  - Heal
   layers:
   - Default
   - TransparentFX

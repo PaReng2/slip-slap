@@ -6,6 +6,8 @@ public class HitDetector : MonoBehaviour
 {
     public PlayerController controllerManager; // 외부에서 할당
 
+    
+
     public enum PlayerID { Player1, Player2 }
     public PlayerID playerID;
 

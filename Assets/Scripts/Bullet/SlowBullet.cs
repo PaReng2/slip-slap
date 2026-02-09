@@ -1,14 +1,16 @@
 using System.Collections;
 using UnityEngine;
 
-public class EffectBullet : MonoBehaviour
+public class SlowBullet : MonoBehaviour
 {
+    public BulletSO bulletData;
     private PlayerController player;
-    public float slowDuration = 5f; // 느려지는 시간(초)
+    public float slowDuration; // 느려지는 시간(초)
 
     private void Start()
     {
         player = FindAnyObjectByType<PlayerController>();
+        slowDuration = bulletData.debuffAmount;
     }
 
     void OnTriggerEnter2D(Collider2D other)
@@ -27,15 +29,15 @@ public class EffectBullet : MonoBehaviour
 
     private IEnumerator ApplySlowToP1()
     {
-        player.frozenP1 = true;
+        player.slowP1 = true;
         yield return new WaitForSeconds(slowDuration);
-        player.frozenP1 = false;
+        player.slowP1 = false;
     }
 
     private IEnumerator ApplySlowToP2()
     {
-        player.frozenP2 = true;
+        player.slowP2 = true;
         yield return new WaitForSeconds(slowDuration);
-        player.frozenP2 = false;
+        player.slowP2 = false;
     }
 }

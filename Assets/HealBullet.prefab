@@ -12,10 +12,10 @@ GameObject:
   - component: {fileID: 8146455783549238859}
   - component: {fileID: 8550308194526262506}
   - component: {fileID: 8089647319510222018}
-  - component: {fileID: 609658495514218569}
+  - component: {fileID: 2844029589769173888}
   m_Layer: 0
-  m_Name: SlowBullet
-  m_TagString: Slower
+  m_Name: HealBullet
+  m_TagString: Heal
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -77,7 +77,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
-  m_Color: {r: 0.2980392, g: 0.6176589, b: 1, a: 1}
+  m_Color: {r: 0.2980392, g: 1, b: 0.37558132, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -159,7 +159,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
---- !u!114 &609658495514218569
+--- !u!114 &2844029589769173888
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -168,8 +168,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 6351121326658399576}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1f40e253545c6e9469b4ca31ab8a1fc1, type: 3}
+  m_Script: {fileID: 11500000, guid: 0a1b9abd0f37e8243810513e74ac4546, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bulletData: {fileID: 11400000, guid: de5279ee34dbfb744ad843b66d2bf551, type: 2}
-  slowDuration: 5
+  bulletData: {fileID: 11400000, guid: a3f55af3c4a11fd41a792e09772249f1, type: 2}

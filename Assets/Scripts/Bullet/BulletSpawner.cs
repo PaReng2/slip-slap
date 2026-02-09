@@ -6,13 +6,21 @@ public class BulletSpawner : MonoBehaviour
 {
     [Header("Prefab")]
     public GameObject bulletPrefab;
+    public GameObject healBullet;
+    public GameObject slowBullet;
 
-    public GameObject SlowBullet;
-
+    [Header("==")]
     public float spawnInterval = 0.5f;
     public float minRadius = 3f;     // 최소 거리
     public float maxRadius = 10f;    // 최대 거리
-    
+
+    [Header("roll")]
+    int roll;
+
+    private void Awake()
+    {
+        roll = Random.Range(0, 100);
+    }
     void Start()
     {
         InvokeRepeating(nameof(Spawn), 0f, spawnInterval);
@@ -20,16 +28,29 @@ public class BulletSpawner : MonoBehaviour
 
     void Spawn()
     {
+        GameObject selectedBullet = bulletPrefab;
+
         float angle = Random.Range(0f, Mathf.PI * 2f);
         float radius = Random.Range(minRadius, maxRadius); // 반지름을 더 크게
 
         Vector3 offset = new Vector3(Mathf.Cos(angle), Mathf.Sin(angle), 0f) * radius;
-        Vector3 spawnPos = transform.position + offset; //양심고백 GPT가 계산해줬읍미다 ㅠㅠ 이건 너무 어렵자나요
+        Vector3 spawnPos = transform.position + offset;
 
-        if (Random.Range(1, 10) == 5)
-            Instantiate(SlowBullet, spawnPos, Quaternion.identity);
-        else
-            Instantiate(bulletPrefab, spawnPos, Quaternion.identity);
+        switch (roll)
+        {
+            case >= 80: // 85 ~ 94 (상위 5% 제외한 다음 10% 확률)
+                selectedBullet = healBullet;
+                break;
+
+            case >= 75: // 70 ~ 84 (그 다음 15% 확률)
+                selectedBullet = slowBullet;
+                break;
+
+            default: // 0 ~ 69 (나머지 70% 확률)
+                break;
+        }
+        Instantiate(selectedBullet, spawnPos, Quaternion.identity);
+
     }
 
     public void StopSpawn()

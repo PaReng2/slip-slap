@@ -119,8 +119,8 @@ public class GameManager : MonoBehaviour
             PlayerController player = FindObjectOfType<PlayerController>();
             if (player != null)
             {
-                player.frozenP1 = false;
-                player.frozenP2 = false;
+                player.slowP1 = false;
+                player.slowP2 = false;
             }
 
             var hit1 = p1.GetComponentInChildren<HitDetector>();
@@ -171,25 +171,31 @@ public class GameManager : MonoBehaviour
     {
         PlayerController player = FindObjectOfType<PlayerController>();
         
-        if (player.frozenP1)
+        if (player.slowP1)
         {
             Debuff1.enabled = true;
             Debuff1.text = "Slow!";
         }
+        else
+            Debuff1.enabled = false;
+        
 
-        if (player.frozenP2)
+        if (player.slowP2)
         {
             Debuff2.enabled = true;
             Debuff2.text = "Slow!";
         }
+        else
+            Debuff2.enabled = false;
+
 
         if (isDathP1 || isDathP2)
         {
             Debuff1.enabled = false;
             Debuff2.enabled = false;
 
-            player.frozenP1 = false;
-            player.frozenP2 = false;
+            player.slowP1 = false;
+            player.slowP2 = false;
         }
     }
 
